@@ -4,24 +4,31 @@ import PropTypes from 'prop-types';
 class TodoItem extends Component {
 
     static propTypes = {
-        label: PropTypes.string.isRequired,
-        remove: PropTypes.func.isRequired
+        todo: PropTypes.object.isRequired,
+        remove: PropTypes.func.isRequired,
+        complete: PropTypes.func.isRequired
+
+};
+
+    handleRemoveClick = (e) => {
+        this.props.remove(this.props.todo.id);
     };
 
-    handleRemoveClick = () => {
-        this.props.remove(this.props);
+    handleCompleteClick = (e) => {
+        console.log(this.props);
+        this.props.complete(this.props.todo.id);
     };
 
     render() {
 
-        let label = this.props.label;
+        let label = this.props.todo.label;
         return (
             <div>
                 <div className="todo-label">
                     {label}
                 </div>
-                <button> +</button>
-                <button onClick={this.handleRemoveClick}> -</button>
+                <button onClick={this.handleCompleteClick}> + </button>
+                <button onClick={this.handleRemoveClick}> - </button>
             </div>
 
 
